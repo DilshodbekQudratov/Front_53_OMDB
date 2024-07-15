@@ -121,7 +121,7 @@ function showSimilarMovies(movies){
     console.log(Array)
 
     Array.forEach(function(similar) {
-        // здесь можно использовать переменную similar для доступа к текущему элементу массива
+        
         console.log(similar.Poster);
          
         similarMovies.innerHTML += `  <div class="similarCard" style="background-image: url('${similar.Poster}')">
