@@ -255,3 +255,6 @@ main .rounded{
     top: 5px;
     filter: invert(100%);
 }
+main {
+    display: none;
+}

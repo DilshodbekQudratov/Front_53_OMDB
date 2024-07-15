@@ -36,12 +36,14 @@ searchBtn.addEventListener("click", findMovie)
 
 let loader = document.querySelector(".loader")
 let massage = document.querySelector(".massage")
+let main = document.querySelector("main")
 
 
 
 async function findMovie() {
     massage.style.display = "none"
     loader.style.display = "block"
+    main.style.display = "block"
 
     let search = document.getElementsByName("search")[0].value 
     let movie = await sendRequest("http://www.omdbapi.com/", "GET", {
