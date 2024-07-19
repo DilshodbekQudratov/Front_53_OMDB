@@ -5,6 +5,7 @@ themeChanger.addEventListener("click", changeTheme)
 function changeTheme(){
     let body = document.querySelector("body")
     body.classList.toggle("dark")
+
 }
 
 async function sendRequest(url, method, data) {
@@ -125,9 +126,18 @@ function showSimilarMovies(movies){
     Array.forEach(function(similar) {
         
         console.log(similar.Poster);
+        
+    /* Array.forEach((similar) => {
+        
+        console.log(similar.Poster);
+        const exists = favs.some( fav => fav.imdbid == similar.imdbID);
+        let favClass = ""
+        if(exists) {
+            favClass = "active"
+        } */
          
         similarMovies.innerHTML += `  <div class="similarCard" style="background-image: url('${similar.Poster}')">
-                <div class="favStar">
+                <div class="favStar" data-poster = ${similar.Poster} data-title = ${similar.Title} data-imdbid = ${similar.imdbID} >
                  <img src="./img/favBtn.svg" alt="">
 
                 </div>
@@ -137,7 +147,54 @@ function showSimilarMovies(movies){
     });
     
     similarMovies.style.display = "grid"
+    addactivateFavbtns()
 
 }
-    
-    
+
+    function addactivateFavbtns(){
+        document.querySelectorAll(".favStar").forEach((Button) => {
+            Button.addEventListener('click', addToFav)
+        })
+    }
+   /*  let favs = localStorage.getItem('favs')
+    if (!favs) {
+        favs = []
+        localStorage.setItem('favs', JSON.stringify(favs))
+    }
+    else{
+        favs = JSON.parse(favs)
+    } */
+    function addToFav(){
+        let Button = event.currentTarget /* содержит в себе причину вызова фунции. какой из элементов вызвал функцию  */
+        console.log(Button)
+        let poster = Button.getAttribute('data-poster')
+        let tittle = Button.getAttribute('data-title')
+        let imdbid = Button.getAttribute('data-imdbid')
+        Button.classList.toggle('active')
+       
+       /*  const exists = favs.some(fav => fav.imdbid == imdbid);
+        
+        if (exists) {
+            //удалить из LS
+            favs = favs.filter(fav => fav.imdbid !== imdbid);
+            localStorage.setItem('favs', JSON.stringify(favs))
+
+            Button.classList.remove('active')
+        } else {
+            //Добавить в LS
+            let fav = {imdbid, tittle, poster}
+            favs.push(fav)
+            
+            localStorage.setItem('favs', JSON.stringify(favs))
+
+            Button.classList.add('active')
+        }
+ */
+        
+    }
+
+   /*  Объяснение кода
+    document.querySelectorAll(".favStar"): выбирает все элементы с классом favStar и возвращает NodeList.
+    .forEach((favBtn) => {...}): итерируется по каждому элементу в NodeList. В этом контексте favBtn представляет текущий элемент из NodeList.
+    favBtn.addEventListener('click', addToFav): для текущего элемента (favBtn) добавляется обработчик события click, который вызывает функцию addToFav.
+    Когда событие клика происходит, браузер передает объект события (event) в функцию addToFav. Внутри addToFav вы можете получить целевой элемент (элемент, на который кликнули) через event.target. */
