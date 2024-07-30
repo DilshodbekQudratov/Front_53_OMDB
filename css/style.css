@@ -124,9 +124,7 @@ main.rounded {
     position: relative;
 }
 .movieDesc {
-    flex: 300px 1 0; /*flex-basis = 300px - базовый размер по основной оси; 
-    flex-grow = 1 - будет расти, чтобы заполнить все доступное пространство 
-    контейнера; flex-shrink = 0 - не будет сжиматься меньше 300 пикселей*/
+    flex: 300px 1 0; 
 }
 .desc {
     display: grid;

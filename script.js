@@ -30,11 +30,11 @@ function checkTheme() {
 // Функция отправки запросов
 async function sendRequest(url, method, data) {
     if (method == "POST") {
-        let response = await fetch(url, { // fetch - функция отправки запроса по url-адресу, возвращающая обещание отправить запрос, оператор await заставляет JS ждать ответ от сервера и подразумевает, что функция sendRequest() - асинхронная
+        let response = await fetch(url, { 
             method: "POST",
             headers: {
-                'Accept': 'application/json', // в каком формате мы получим ответ от сервера
-                'Content-Type': 'application/json' // в каком формате отправим информацию на сервер
+                'Accept': 'application/json', 
+                'Content-Type': 'application/json' 
             },
             body: JSON.stringify(data)
         })
@@ -83,6 +83,7 @@ async function searchMovie() {
 }
 
 function showMovie(movie) {
+
     let movieTitleh2 = document.querySelector('.movieTitle h2')
     movieTitleh2.innerHTML = movie.Title
 
@@ -107,6 +108,7 @@ function showMovie(movie) {
             <div class="movieRight">${movie[key]}</div>
         </div>`
     });
+
 } 
 
 async function searchSimilarMovies(title) {
@@ -132,11 +134,13 @@ function showSimilarMovies(movies) {
 
     
     const similarTitle = document.querySelector(".similarTitle");
+
     const similarMoviesDiv = document.querySelector(".similarMovies");
+
     similarMoviesDiv.innerHTML = ""
     movies.forEach((movie) => {
 
-        const exists = favs.some(fav => fav.imdbid == movie.imdbID); // дает возможность увидеть, какие похожие фильмы были добавлены в избранные при повторном поиске одного и того же фильма
+        const exists = favs.some(fav => fav.imdbid == movie.imdbID); 
         let favClass = ""
         if (exists) {
             favClass = "active"
@@ -150,7 +154,9 @@ function showSimilarMovies(movies) {
             `;
     });
     similarMoviesDiv.style.display = "grid";
+
     similarTitle.style.display = "block";
+
     activateFavBtns()
 }
 
@@ -160,7 +166,7 @@ function activateFavBtns() {
     })
 }
 
-let favs = localStorage.getItem('favs') // создаем массив сохраненных в избранное фильмов
+let favs = localStorage.getItem('favs') 
 if (!favs) {
     favs = []
     localStorage.setItem('favs', JSON.stringify(favs))
@@ -168,27 +174,33 @@ if (!favs) {
     favs = JSON.parse(favs)
 }
 function addToFav() {
-        let favBtn = event.target // подсвечивает конкретный элемент, который вызывает функцию addToFav()
+        let favBtn = event.target 
         let poster = favBtn.getAttribute('data-poster')
+
         let title = favBtn.getAttribute('data-title')
+
         let imdbid = favBtn.getAttribute('data-imdbid')
+
         const exists = favs.some(fav => fav.imdbid == imdbid);
 
         if (exists) {
             // Удалить из LS
             favs = favs.filter(fav => fav.imdbid !== imdbid);
+
             localStorage.setItem('favs', JSON.stringify(favs))
+
             favBtn.classList.remove('active')
         }
         else {
             // Добавить в LS
             let fav = {imdbid, title, poster}
+
             favs.push(fav)
             localStorage.setItem('favs',  JSON.stringify(favs))
+
             favBtn.classList.add('active')
         }
-        // console.log(title, imdbid, poster);
-        // favBtn.classList.toggle('active')
+    
 }
 
 document.querySelector('.FavMoviesBtn').addEventListener('click', getListFav)
