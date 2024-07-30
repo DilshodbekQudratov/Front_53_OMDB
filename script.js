@@ -129,18 +129,7 @@ async function searchSimilarMovies(title) {
  
 }
 function showSimilarMovies(movies) {
-    // let similarMoviesDiv = document.querySelector(".similarMovies");
-    // similarMoviesDiv.innerHTML = "";
-    // movies.forEach(movie => {
-    // similarMoviesDiv.innerHTML += `
-    //         <div class="similarCard" style="background-image: url('${movie.Poster}')">
-    //             <div class="favStar"></div>
-    //             <h3>${movie.Title}</h3>
-    //         </div>
-    //     `;
-    // });
-    // document.querySelector(".similarTitle").style.display = "block";
-    // similarMoviesDiv.style.display = "grid";
+
     
     const similarTitle = document.querySelector(".similarTitle");
     const similarMoviesDiv = document.querySelector(".similarMovies");
